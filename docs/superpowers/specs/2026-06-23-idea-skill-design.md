@@ -164,14 +164,15 @@ Template (`templates/proposal-template.md`):
 
 ## 10. Hard Rules (AI Behavior Constraints)
 
-1. **One question at a time** (unless asking for sub-options of the same theme).
-2. **Confirm before advancing**: after each stage, ask "Satisfied with this answer? Add anything, or move to the next stage?"
+1. **One question at a time** (unless asking for sub-options of the same theme). **Default to `AskUserQuestion` (multi-choice) when 2-4 options cover the answer space; reserve open-ended text for genuinely free-form answers** (see section 16 below).
+2. **Confirm before advancing**: after each stage, confirm via `AskUserQuestion` with 3 options (continue / add detail / go back).
 3. **User can always go back** to a previous stage.
 4. **Show full markdown before writing** to disk. Never write silently.
 5. **Never decide for the user**: tech stack, target user, competitor — AI gives options, user picks.
 6. **No placeholders** in the final proposal. Unfilled sections must read "(skipped by user)".
 7. **No premature proposal generation**: if any of the 5 stages hasn't exited, do NOT generate a "final" proposal.
 8. **No silent edits to confirmed stages**: once user moves past a stage, that stage's content is locked unless the user explicitly requests a change.
+9. **Choose by default, type by exception**: ~80% of questions must be `AskUserQuestion` multi-choice. Free-form text is for ~20% (personal stories, free-form feature lists, emotion).
 
 ## 11. Auto User-Level Detection
 
@@ -218,3 +219,34 @@ None at design time. All clarifications resolved during brainstorming.
 - Persistent user profile (no memory across sessions)
 - Integration with task managers (Linear, Jira)
 - Auto-generation of GitHub repo from proposal
+
+## 16. Question Formatting: Choice-First
+
+To avoid constant back-and-forth typing, the skill is biased toward multi-choice questions via the `AskUserQuestion` tool. The user clicks an option instead of typing prose.
+
+**Use `AskUserQuestion` for ~80% of questions:**
+- Stage 1 opening: 4 starting paths (vague / known / free-form / suggestion list)
+- Stage 2 audience: persona type pick (4 common + Other)
+- Stage 3 MVP category: CLI / web app / API / mobile (then free-form for feature list)
+- Stage 4 tech stack: experience preference (4 paths) + conditional stack list
+- Stage 4 no-code path: Bolt.new / Cursor / Replit Agent / v0.dev
+- Stage 5 competitive landscape: market structure (4 types)
+- Stage 5 differentiator gap: gap type (4 categories)
+- Stage transition confirmations (continue / add detail / go back)
+- Final write-to-disk confirmation (write / edit / restart)
+- Post-write follow-up selection (plan / week-1 / risks)
+
+**Use open-ended text for ~20% of questions:**
+- Personal scene descriptions
+- Naming a specific person
+- Explaining emotional weight
+- Listing free-form MVP features
+- Free-form differentiation narrative
+
+**Tactical rules:**
+- Always include an "Other / free-form" escape option.
+- For stimulus mode, present 3 contrasting examples as `AskUserQuestion` options.
+- Batch related sub-options into a single `AskUserQuestion` call (max 4 options).
+- When offering 3 follow-ups after writing, use ONE `AskUserQuestion` with 3 options, not three separate questions.
+
+Each reference file's `## Question Format` section specifies the exact `AskUserQuestion` shape for that stage's opening question.

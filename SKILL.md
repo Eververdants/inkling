@@ -38,7 +38,40 @@ Run these stages in order. Each stage loads its probe tree from a reference file
 - Turn 2: quantification (how much, how often?)
 - Turn 3: emotion (how painful?)
 
-After each stage, confirm with the user: "Satisfied with this? Add anything, or move to the next stage?"
+After each stage, confirm with the user via `AskUserQuestion`:
+- "Satisfied with this stage?"
+  - Option A: "Move to next stage"
+  - Option B: "Add more detail to this stage"
+  - Option C: "Go back to previous stage"
+
+## Question formatting: choice-first
+
+**Default to `AskUserQuestion` (multi-choice) whenever 2-4 options cover the answer space.** The user clicks an option instead of typing. Open-ended text questions are reserved for genuinely unconstrained answers (free-form descriptions, personal stories).
+
+**Use `AskUserQuestion` for (~80% of questions):**
+- Stage 1 opening (offer 3-4 common starting paths: vague / known / free-form / suggestion list)
+- Persona selection (offer 4 common persona types: developer / designer / PM / writer)
+- MVP category (CLI / web app / API / mobile/extension)
+- Tech stack selection (offer 4 common stacks based on user's experience level)
+- No-code path selection (Bolt.new / Cursor / Replit Agent / v0.dev)
+- Competitor selection (offer common ones or "let me search first")
+- Stage transition confirmations
+- Slug and filename confirmation
+- Final write-to-disk confirmation
+- The 3 follow-up offers after writing
+
+**Use open-ended text for (~20% of questions):**
+- The user describing a personal scene
+- The user naming a specific person they have in mind
+- The user explaining why something hurts (emotion)
+- Free-form MVP feature list (when 4 options can't cover it)
+
+**Batch related sub-options into a single `AskUserQuestion` call** (4 options max) rather than 4 separate prompts. Example: instead of asking "tech stack?" then "deployment?" then "database?" — combine into one question with 4 pre-built stack options.
+
+**Tactical rules:**
+- Always include an "Other / Let me describe in my own words" option so the user can fall through to free-form if none fit.
+- For stimulus mode ("I don't know" twice), present 3 contrasting examples (designer / kid / enterprise) as options rather than open-ended.
+- When offering 3 follow-ups after writing, use one `AskUserQuestion` with 3 options, not three separate questions.
 
 ## Auto user-level detection
 
@@ -54,17 +87,25 @@ After the first 1-2 answers, infer the user's level. State it once, then proceed
 
 After stage 5 exits:
 1. Render the full proposal in chat from `templates/proposal-template.md`. Do NOT write yet.
-2. Ask: "Here's your proposal. Satisfied? Modify any section, or write to disk?"
-3. On confirmation, save to `docs/ideas/YYYY-MM-DD-<slug>-idea.md`:
+2. Confirm via `AskUserQuestion`:
+   - "Satisfied with the proposal?"
+     - Option A: "Write to disk as-is"
+     - Option B: "Edit a specific section (you'll be asked which)"
+     - Option C: "Start over with a different angle"
+3. On "Write to disk" confirmation, save to `docs/ideas/YYYY-MM-DD-<slug>-idea.md`:
    - `<slug>` = lowercase kebab-case, 2-4 words, derived from the stage-1 problem
    - Create `docs/ideas/` if absent
-4. After saving, offer 3 follow-ups: implementation plan, week-1 task breakdown, or technical risk discussion.
+4. After saving, offer 3 follow-ups in a single `AskUserQuestion`:
+   - "What next?"
+     - Option A: "Break this into an implementation plan"
+     - Option B: "Sketch the week-1 task list for the MVP"
+     - Option C: "Discuss technical risks now"
 
 If the user says "I need to think" at any point: save current state to `docs/ideas/.drafts/<timestamp>-draft.md` and stop.
 
 ## Hard rules
 
-1. **One question at a time** unless asking for sub-options of the same theme.
+1. **One question at a time** unless asking for sub-options of the same theme. **Default to `AskUserQuestion` (multi-choice) when 2-4 options cover the answer space; reserve open-ended text for genuinely free-form answers** (see "Question formatting: choice-first" above).
 2. **Confirm before advancing** between stages.
 3. **User can always go back** to a previous stage.
 4. **Show full markdown before writing** — never write silently.
@@ -72,6 +113,7 @@ If the user says "I need to think" at any point: save current state to `docs/ide
 6. **No placeholders** in the final proposal. Skipped sections read "(skipped by user)".
 7. **No premature proposal** — all 5 stages must exit before generating the final markdown.
 8. **No silent edits** — once a stage is confirmed, do not change it unless the user asks.
+9. **Choose by default, type by exception** — ~80% of questions must be `AskUserQuestion` multi-choice. Free-form text is for ~20% (personal stories, free-form feature lists, emotion).
 
 ## Edge cases
 

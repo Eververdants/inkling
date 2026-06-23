@@ -8,6 +8,30 @@ Pick a primary stack the user can actually ship with. Bias toward "what you alre
 
 "What languages, frameworks, or platforms do you already feel comfortable shipping in? And is there anything you've been wanting to learn for this project?"
 
+## Question Format
+
+Use a 2-step `AskUserQuestion` flow, then a free-form fallback.
+
+**Step 1 — `AskUserQuestion` for the experience preference:**
+
+Question: "Which path do you want for this project?"
+Options:
+- A) "Use a stack I already know" (fastest, lowest risk)
+- B) "Learn something new for this project" (slower, more upside)
+- C) "I don't code — recommend a no-code path"
+- D) "I have no preference, pick for me based on the MVP type"
+
+**Step 2 — `AskUserQuestion` for the actual stack, conditional on step 1:**
+
+- If A: list 4 common stacks the user is likely to know (TypeScript+Next.js / Python+Django / Go+chi / Java+Spring)
+- If B: list 4 interesting-to-learn stacks (Rust+actix / Elixir+Phoenix / Swift+SwiftUI / Bun+TypeScript)
+- If C: list 4 no-code/AI-builder paths (Bolt.new / Cursor + Claude / Replit Agent / v0.dev)
+- If D: agent picks based on the MVP category chosen in stage 3
+
+**Step 3 (only if user picks "Other" or wants to override):** free-form text — "Tell me the stack in your own words."
+
+Keep the question count tight: ideally 2 `AskUserQuestion` calls in this stage, not 3+.
+
 ## Probe Tree
 
 - **IF user names a language/framework confidently** ("I know Next.js and Postgres")

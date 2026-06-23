@@ -8,6 +8,19 @@ Extract a concrete, emotionally-weighted problem statement. The user must be abl
 
 "What problem are you trying to solve, or what frustrates you in your work or life right now?"
 
+## Question Format
+
+Present the opening as `AskUserQuestion`:
+
+Question: "Where are you right now — which starting point fits?"
+Options:
+- A) "Vague: I just want to build something, help me find a problem" → leads to the "vague answer" branch in the probe tree
+- B) "I already have a problem in mind, help me sharpen the wording" → leads to the "personal pain" branch
+- C) "Let me describe in my own words (free-form)" → falls through to text input
+- D) "Suggest 3 common indie-hacker pain points, I'll pick one" → stimulus mode
+
+Always keep the "free-form" escape hatch (option C) so the user is never forced to pick a poor fit. After the user picks or types, follow the corresponding probe-tree branch below.
+
 ## Probe Tree
 
 - **IF user gives a vague answer** ("I don't know", "everything is broken", "I just want to build something")

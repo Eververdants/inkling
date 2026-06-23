@@ -8,6 +8,27 @@ Force the user to draw a sharp line between "must have for v1" and "nice to have
 
 "If you could ship something in 2 weeks that made your persona say 'finally, this solves the worst part' — what would it do? List the smallest set of features that would still feel like a real solution."
 
+## Question Format
+
+Use a 2-step flow: a choice question to pick the MVP category, then a free-form question for the actual feature list.
+
+**Step 1 — `AskUserQuestion` for the category:**
+
+Question: "What kind of product is this MVP?"
+Options:
+- A) "CLI / terminal tool" (e.g. dev tool, automation script)
+- B) "Web app / SaaS dashboard" (e.g. Notion-style editor, admin UI)
+- C) "API / backend service" (e.g. mock server, payment integration)
+- D) "Mobile app or browser extension"
+
+After the user picks, lock that in and move to step 2.
+
+**Step 2 — free-form text (the only place in this stage):**
+
+"List 3-5 features for the MVP. For each one, write one sentence: what the user does, and what they feel after. If you list more than 5, I'll cut to 3 — be ruthless."
+
+This is intentionally open-ended: feature ideas cannot be constrained to 4 options, and the user's creativity is the point of the question.
+
 ## Probe Tree
 
 - **IF user lists more than 5 features**

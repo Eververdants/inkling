@@ -1,4 +1,3 @@
-````markdown
 # Stage 2: Discover the Audience
 
 ## Goal
@@ -8,6 +7,23 @@ Convert the abstract problem into a concrete user persona with a specific usage 
 ## Opening Question
 
 "Of all the people who have this problem, who has it most acutely? Tell me about one specific person you have in mind — it could even be yourself."
+
+## Question Format
+
+Present the opening as `AskUserQuestion`:
+
+Question: "Who has the problem most acutely?"
+Options:
+- A) "Myself — I have this problem" → leads to the "myself" branch in the probe tree
+- B) "A specific person I know" → leads to the "broad group" branch (narrow it down)
+- C) "A user type I imagine (not personally known)" → leads to a follow-up `AskUserQuestion` with 4 common persona types (designer / developer / PM / writer)
+- D) "Let me describe in my own words (free-form)" → falls through to text input
+
+If the user picks C, immediately follow up with a second `AskUserQuestion`:
+Question: "Which persona type fits best?"
+Options: "Designer or creative" / "Developer or engineer" / "Product manager or operator" / "Writer, student, or knowledge worker"
+
+Only fall through to text input if the user picks D or the "Other" escape on the second question.
 
 ## Probe Tree
 
@@ -46,4 +62,3 @@ If any criterion is unmet, ask one more focused probe. Do not advance.
 - Don't suggest the target audience. The user must pick.
 - Don't let the user skip the scene. Without a scene, MVP features in stage 3 will be generic.
 - Don't accept "developers" or "designers" alone. Require a narrower slice.
-````
