@@ -1,32 +1,32 @@
-# /idea — Software Project Brainstorming Skill
+# /inkling — Software Project Brainstorming Skill
 
-A Claude Code / Anthropic-agents skill that helps you figure out what software project to build. You run `/idea`, the AI asks you 8-12 questions across 5 stages, and at the end you get a 5-section project proposal saved to `docs/ideas/`.
+A Claude Code / Anthropic-agents skill that helps you figure out what software project to build. You run `/inkling`, the AI asks you 8-12 questions across 5 stages, and at the end you get a 5-section project proposal saved to `docs/ideas/`.
 
 ## Installation
 
 ### Claude Code
 
-This project's root directory IS the skill folder. Copy the whole project (or clone the repo) into one of these locations, renamed to `idea`:
+This project's root directory IS the skill folder. Copy the whole project (or clone the repo) into one of these locations, renamed to `inkling`:
 
-- Project-local: `.claude/skills/idea/` inside the project where you'll use `/idea`
-- User-global: `~/.claude/skills/idea/`
+- Project-local: `.claude/skills/inkling/` inside the project where you'll use `/inkling`
+- User-global: `~/.claude/skills/inkling/`
 
 ```bash
-# from the project where you want to use /idea
+# from the project where you want to use /inkling
 mkdir -p .claude/skills
-cp -r /path/to/IdeasSkill .claude/skills/idea
+cp -r /path/to/IdeasSkill .claude/skills/inkling
 ```
 
 ### Cursor / Trae / Codex
 
-These agents use the same Anthropic SKILL.md format. Copy the project (renamed to `idea`) to wherever the agent looks for skills — typically `.cursor/skills/idea/`, `~/.trae-cn/skills/idea/`, or `~/.codex/skills/idea/`.
+These agents use the same Anthropic SKILL.md format. Copy the project (renamed to `inkling`) to wherever the agent looks for skills — typically `.cursor/skills/inkling/`, `~/.trae-cn/skills/inkling/`, or `~/.codex/skills/inkling/`.
 
 ## Usage
 
 Invoke the skill with the slash command:
 
 ```
-/idea
+/inkling
 ```
 
 Or describe your situation in natural language — the skill triggers on phrases like:
@@ -41,7 +41,7 @@ Or describe your situation in natural language — the skill triggers on phrases
 
 ```mermaid
 flowchart TD
-    A[User: /idea] --> B[Stage 1: Discover the Problem]
+    A[User: /inkling] --> B[Stage 1: Discover the Problem]
     B --> C{Exit?}
     C -->|No| B
     C -->|Yes| D[Stage 2: Discover the Audience]

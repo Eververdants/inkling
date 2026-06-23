@@ -1,9 +1,9 @@
 ---
-name: idea
-description: Use this skill when the user wants to start a new software project but doesn't know what to build. Triggers on /idea, "I want to start a project", "help me brainstorm", "I need project ideas", "what should I build", "想做个项目", "帮我想个点子", or any request for software project brainstorming from scratch. Does NOT trigger when the user has a concrete project in mind or is asking for technical advice on an existing project.
+name: inkling
+description: Use this skill when the user wants to start a new software project but doesn't know what to build. Triggers on /inkling, "I want to start a project", "help me brainstorm", "I need project ideas", "what should I build", "想做个项目", "帮我想个点子", or any request for software project brainstorming from scratch. Does NOT trigger when the user has a concrete project in mind or is asking for technical advice on an existing project.
 ---
 
-# /idea — Software Project Brainstorming
+# /inkling — Software Project Brainstorming
 
 Drive a 5-stage recursive probing conversation to help a user with no clear project idea converge on one concrete, defensible software project, then write the result to `docs/ideas/YYYY-MM-DD-<slug>-idea.md`.
 
