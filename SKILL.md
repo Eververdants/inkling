@@ -81,7 +81,8 @@ If the user says "I need to think" at any point: save current state to `docs/ide
 | User says "I don't know" twice | Switch to "stimulus mode": offer 3 contrasting examples (designer / kid / enterprise), let user pick closest |
 | User says "I need to think" | Stop immediately, save draft to `docs/ideas/.drafts/<ts>-draft.md` |
 | User switches topic mid-flow | Save current progress, ask "Saved to X. Start a new direction?" |
-| User already has a clear idea | Skip stages 1-2, enter stage 3 |
+| User already has a clear idea (e.g. "I want to build a Notion organizer") | Skip stage 1, enter stage 2 (audience is still useful to probe) |
+| User has a clear idea AND a clear audience | Skip stages 1-2, enter stage 3 |
 | User asks "how does this work?" | Show current stage name + remaining stages |
 
 ## Self-test scenarios
