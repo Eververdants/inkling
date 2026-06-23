@@ -42,22 +42,24 @@ A Claude Code / Anthropic-agents skill that helps users who want to start a new 
 
 ## 4. File Layout
 
+The project root (`IdeasSkill/`) IS the skill folder. When installed, the user copies the whole project to `.claude/skills/idea/` (or platform equivalent). All files therefore live at the project root, not in a subdirectory.
+
 ```
-idea/
-├── SKILL.md                          # Main entry: triggers, flow, hard rules
-├── README.md                         # User-facing docs
-├── LICENSE                           # MIT
+.                                          # project root = skill folder
+├── SKILL.md                                # Main entry: triggers, hard rules, flow
+├── README.md                               # User-facing docs
+├── LICENSE                                 # MIT
 ├── references/
-│   ├── discover-problem.md           # Stage 1
-│   ├── discover-audience.md          # Stage 2
-│   ├── define-mvp.md                 # Stage 3
-│   ├── choose-tech.md                # Stage 4
-│   └── differentiate.md              # Stage 5
+│   ├── discover-problem.md                 # Stage 1
+│   ├── discover-audience.md                # Stage 2
+│   ├── define-mvp.md                       # Stage 3
+│   ├── choose-tech.md                      # Stage 4
+│   └── differentiate.md                    # Stage 5
 ├── templates/
-│   └── proposal-template.md          # 5-section proposal template
+│   └── proposal-template.md                # 5-section proposal template
 └── examples/
-    ├── cli-time-tracker.md           # Worked example 1
-    └── api-mock-server.md            # Worked example 2
+    ├── cli-time-tracker.md                 # Worked example 1
+    └── api-mock-server.md                  # Worked example 2
 ```
 
 ## 5. Five-Stage Flow
