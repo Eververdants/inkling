@@ -47,7 +47,8 @@ The project root (`IdeasSkill/`) IS the skill folder. When installed, the user c
 ```
 .                                          # project root = skill folder
 ├── SKILL.md                                # Main entry: triggers, hard rules, flow
-├── README.md                               # User-facing docs
+├── README.md                               # English user-facing docs
+├── README.zh.md                            # Chinese user-facing docs
 ├── LICENSE                                 # MIT
 ├── references/
 │   ├── discover-problem.md                 # Stage 1
@@ -200,14 +201,24 @@ Detection is one-shot after the first stage; AI states the inferred level once a
 - Input: One message covering problem, audience, MVP, tech, competitors
 - Expected: AI starts at stage 1, only asks clarification questions (quantify, emotion), doesn't repeat known info
 
-## 13. README.md Content
+## 13. README Content (Bilingual)
 
+The project ships with two README files, identical structure, linked at the top of each:
+
+- `README.md` — English (default; visible on GitHub repo root)
+- `README.zh.md` — Chinese (Simplified)
+
+Both files must contain:
+
+- A language-switching line at the top: `[English](README.md) | [中文](README.zh.md)`
 - Install instructions (copy to `.claude/skills/inkling/` or `~/.claude/skills/inkling/`)
 - Trigger list
 - Mermaid flow diagram of the 5 stages
 - Links to the 2 worked examples
 - Contribution guide: how to add a new stage, how to edit a probe tree
 - License (MIT)
+
+**Maintenance rule:** any flow change or stage change must be reflected in **both** READMEs in the same commit.
 
 ## 14. Open Questions
 

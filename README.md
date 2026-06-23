@@ -1,5 +1,7 @@
 # /inkling — Software Project Brainstorming Skill
 
+[English](README.md) | [中文](README.zh.md)
+
 A Claude Code / Anthropic-agents skill that helps you figure out what software project to build. You run `/inkling`, the AI asks you 8-12 questions across 5 stages, and at the end you get a 5-section project proposal saved to `docs/ideas/`.
 
 ## Installation
@@ -84,7 +86,8 @@ See `examples/cli-time-tracker.md` and `examples/api-mock-server.md` for worked 
 ├── templates/                          # proposal template
 ├── examples/                           # 2 worked examples
 ├── LICENSE
-└── README.md
+├── README.md                           # English docs
+└── README.zh.md                        # Chinese docs
 ```
 
 ## Contributing
