@@ -1,109 +1,167 @@
-# /inkling — 软件项目头脑风暴技能
+# /inkling — 从 "没想好" 到 "开干"
 
-[English](README.md) | [中文](README.zh.md)
+[English](README.md)
 
-一个 Claude Code / Anthropic agents 技能，帮助你找出值得做的软件项目。运行 `/inkling`，AI 在 5 个阶段里向你提 8-12 个问题（多数问题用 `AskUserQuestion` 让你直接点选），最后得到一份 5 板块的项目提案，保存在 `docs/ideas/` 目录下。
+**inkling** 是一个 AI 驱动的头脑风暴技能。你没想好做什么项目时，它会用 5 个阶段、约 10 个问题，帮你把一个模糊的念头，变成一份可以照着开干的完整提案。
 
-## 安装
+支持 Claude Code、Cursor、Codex、Windsurf、Gemini CLI 等所有兼容 Anthropic SKILL.md 格式的 agent。
 
-### Claude Code
-
-本项目的根目录本身就是技能文件夹。把整个项目（或 clone 下来的仓库）复制到下面任一位置，并重命名为 `inkling`：
-
-- 项目内：`.claude/skills/inkling/`，放在你会使用 `/inkling` 的项目里
-- 全局：`~/.claude/skills/inkling/`
+## 快速上手
 
 ```bash
-# 在你想使用 /inkling 的项目根目录下执行
-mkdir -p .claude/skills
-cp -r /path/to/IdeasSkill .claude/skills/inkling
+# 全局安装 — 一条命令搞定
+npx skills add eververdants/inkling/tree/main/skill -g -y
 ```
 
-### Cursor / Trae / Codex
-
-这些 agent 使用相同的 Anthropic SKILL.md 格式。把项目（重命名为 `inkling`）复制到对应 agent 寻找技能的位置 —— 通常是 `.cursor/skills/inkling/`、`~/.trae-cn/skills/inkling/`，或 `~/.codex/skills/inkling/`。
-
-## 用法
-
-通过斜杠命令调用技能：
+然后在任意项目里：
 
 ```
 /inkling
 ```
 
-或者用自然语言描述你的情况 —— 技能在以下说法时触发：
+AI 会问你约 10 个问题，贯穿 5 个阶段。结束之后，提案文件会保存在你的项目目录下 `<你的项目>/docs/ideas/`。
 
-- "I want to start a project"
-- "help me brainstorm"
-- "I need project ideas"
-- "what should I build"
-- "想做个项目"
-- "帮我想个点子"
+## 安装方式
+
+### npx skills add（推荐）
+
+支持 40+ 种 agent，自动检测你用的工具并安装到正确位置。
+
+```bash
+# 全局安装（所有项目可用）
+npx skills add eververdants/inkling/tree/main/skill -g -y
+
+# 只装在当前项目
+npx skills add eververdants/inkling/tree/main/skill -y
+
+# 指定 agent
+npx skills add eververdants/inkling/tree/main/skill -a cursor -g -y
+
+# 同时装到所有支持的 agent
+npx skills add eververdants/inkling/tree/main/skill --all -y
+```
+
+### 手动复制
+
+技能内容在仓库的 `skill/` 子目录中。只复制这个文件夹：
+
+```bash
+git clone https://github.com/Eververdants/inkling.git /tmp/inkling
+cp -r /tmp/inkling/skill ~/.claude/skills/inkling
+rm -rf /tmp/inkling
+```
+
+| Agent | 路径 |
+|-------|------|
+| Claude Code | `~/.claude/skills/inkling/` |
+| Cursor | `~/.cursor/skills/inkling/` |
+| Windsurf | `~/.windsurf/skills/inkling/` |
+| Codex | `~/.codex/skills/inkling/` |
+| Trae (CN) | `~/.trae-cn/skills/inkling/` |
+| Gemini CLI | `~/.gemini/skills/inkling/` |
+
+## 你会得到什么
+
+一份 5 板块的 markdown 提案，成熟到可以直接开工：
+
+```
+<你的项目>/docs/ideas/2026-06-23-<slug>-idea.md
+```
+
+| # | 板块 | 内容 |
+|---|------|------|
+| 1 | **一句话概括** | ≤20 字讲清做什么、为谁做 |
+| 2 | **问题陈述** | 谁在痛、多痛、为什么是现在 |
+| 3 | **目标用户与场景** | 一个具体的人，一个生动的使用瞬间 |
+| 4 | **MVP 核心功能** | 3–5 个可交付的用户操作 |
+| 5 | **凭什么是你** | 竞争格局、你的独特优势、真实风险 |
+
+参考 [`examples/api-mock-server.md`](skill/examples/api-mock-server.md) 和 [`examples/cli-time-tracker.md`](skill/examples/cli-time-tracker.md) 查看完整示例。
 
 ## 5 阶段流程
 
+每次对话分为 5 个阶段，每个阶段有明确目标。你掌握节奏 —— 可以前进、深入追问，也可以回退修改。
+
 ```mermaid
 flowchart TD
-    A[用户: /inkling] --> B[阶段 1: 发现问题]
-    B --> C{退出?}
+    A["/inkling"] --> B[阶段 1<br/>发现问题]
+    B --> C{满意了?}
     C -->|否| B
-    C -->|是| D[阶段 2: 发现受众]
-    D --> E{退出?}
+    C -->|是| D[阶段 2<br/>发现受众]
+    D --> E{满意了?}
     E -->|否| D
-    E -->|是| F[阶段 3: 定义 MVP]
-    F --> G{退出?}
+    E -->|是| F[阶段 3<br/>定义 MVP]
+    F --> G{满意了?}
     G -->|否| F
-    G -->|是| H[阶段 4: 选择技术]
-    H --> I{退出?}
+    G -->|是| H[阶段 4<br/>选择技术]
+    H --> I{满意了?}
     I -->|否| H
-    I -->|是| J[阶段 5: 差异化]
-    J --> K{退出?}
+    I -->|是| J[阶段 5<br/>差异化]
+    J --> K{满意了?}
     K -->|否| J
-    K -->|是| L[在聊天中生成提案]
-    L --> M{用户确认?}
+    K -->|是| L[生成提案]
+    L --> M{确认?}
     M -->|否| L
-    M -->|是| N[写入 docs/ideas/]
-    N --> O[提供后续选项]
+    M -->|是| N["写入<br/><项目>/docs/ideas/"]
 ```
 
-## 输出
+### 阶段 1 — 发现问题
+把模糊的念头变成一句具体的问题陈述。不是"效率太低"，而是"每周五花 3 小时手工对账，烦死了"。
 
-一个 markdown 文件，路径是 `docs/ideas/YYYY-MM-DD-<slug>-idea.md`，包含 5 个板块：
+### 阶段 2 — 发现受众
+找出一个真实存在、有这个问题的具体人群。给他们一个名字、一个场景、一个能找到他们的渠道。
 
-1. 一句话描述（≤20 词）
-2. 问题陈述
-3. 目标用户与场景
-4. MVP 核心功能（3-5 个 bullet）
-5. 凭什么是你，为什么是现在
+### 阶段 3 — 定义 MVP
+在"v1 必须做"和"v2 再说"之间划一条硬线。不超过 5 个功能，每个都是用户可以感知的操作，不是技术名词。
 
-参考 `examples/cli-time-tracker.md` 和 `examples/api-mock-server.md` 查看完整示例。
+### 阶段 4 — 选择技术
+选一个你真正能交付的技术栈。倾向你已掌握的，除非有充分理由学新的。
 
-## 文件布局
+### 阶段 5 — 差异化
+承认赛道上有竞争者，找到他们留出的缝隙，说清楚为什么你是填上它的人。
+
+## 为什么要用 inkling？
+
+做错方向是项目最大的浪费。inkling 让你在写代码之前，先把关键问题想透：
+
+- **速度快** — ～10 个问题，～10 分钟，一份完整提案
+- **挖得深** — 不只是问"你要做什么"，而是量化痛点、锁定受众
+- **不糊弄** — 每个阶段有明确的退出条件，防止含混过关
+- **你主导** — AI 提问，你回答。主意是你的，决策权也是你的
+
+## 项目结构
 
 ```
-.                                       # 项目根 = 技能文件夹
-├── SKILL.md                            # 主入口
-├── references/                         # 5 个阶段的提问树
-├── templates/                          # 提案模板
-├── examples/                           # 2 个完整示例
+.
+├── skill/                      # ← 实际技能内容（干净，仅 AI 所需）
+│   ├── SKILL.md                #   技能定义（AI 读这个文件）
+│   ├── references/             #   5 个阶段的提问树
+│   │   ├── discover-problem.md
+│   │   ├── discover-audience.md
+│   │   ├── define-mvp.md
+│   │   ├── choose-tech.md
+│   │   └── differentiate.md
+│   ├── templates/
+│   │   └── proposal-template.md
+│   ├── examples/
+│   │   ├── api-mock-server.md
+│   │   └── cli-time-tracker.md
+│   └── docs/
+│       └── README.md           #   输出目录说明
+├── README.md                   # 英文文档
+├── README.zh.md                # ← 你在这里
 ├── LICENSE
-├── README.md                           # 英文文档
-└── README.zh.md                        # 中文文档
+└── .gitignore
 ```
 
-## 贡献
+## 贡献指南
 
-要新增阶段或修改提问树：
+**新增阶段：** 按现有惯例创建 `references/<stage>.md`（包含 `## Goal`、`## Probe Tree`、`## Exit Criteria`），然后在 `SKILL.md` 的阶段表中更新。
 
-1. 创建或编辑对应的 `references/<stage>.md` 文件。按约定格式：`## Goal`、`## Opening Question`、`## Question Format`（AskUserQuestion 模板）、`## Probe Tree`（带 IF-THEN 规则）、`## Exit Criteria`、`## Anti-patterns`。
-2. 如果新增了 5 阶段表格中的阶段，更新 `SKILL.md`。
-3. 如果改了流程，同步更新 `README.md` 与 `README.zh.md`。
+**新增示例：** 创建 `examples/<project-slug>.md`，包含完整的 5 板块提案，末尾附加 100–200 字的对话复盘。
 
-要新增示例：
-
-1. 在 `examples/<project-slug>.md` 下创建包含完整最终提案（5 板块）的文件。
-2. 在末尾追加一段 100-200 字的"对话复盘"，展示关键节点。
+**改进提问树：** 编辑 `references/` 下的对应文件。每个提问树都标注了针对不同用户回答的处理分支。
 
 ## 许可证
 
-MIT。详见 `LICENSE`。
+MIT。详见 [LICENSE](LICENSE)。

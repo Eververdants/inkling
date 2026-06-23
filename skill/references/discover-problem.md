@@ -1,3 +1,9 @@
+---
+name: discover-problem
+description: Stage 1 probe tree — extract a concrete, emotionally-weighted problem statement
+type: reference
+---
+
 # Stage 1: Discover the Problem
 
 ## Goal

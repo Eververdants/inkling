@@ -1,3 +1,9 @@
+---
+name: choose-tech
+description: Stage 4 probe tree — pick a primary stack the user can ship with; bias toward familiar tools
+type: reference
+---
+
 # Stage 4: Choose the Tech
 
 ## Goal

@@ -1,3 +1,9 @@
+---
+name: differentiate
+description: Stage 5 probe tree — force honesty about the competitive landscape and why this angle can win
+type: reference
+---
+
 # Stage 5: Differentiate
 
 ## Goal

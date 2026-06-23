@@ -1,3 +1,9 @@
+---
+name: discover-audience
+description: Stage 2 probe tree — convert the abstract problem into a concrete user persona with a specific usage scenario
+type: reference
+---
+
 # Stage 2: Discover the Audience
 
 ## Goal

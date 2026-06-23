@@ -1,3 +1,9 @@
+---
+name: define-mvp
+description: Stage 3 probe tree — force a sharp line between v1 must-haves and v2 nice-to-haves
+type: reference
+---
+
 # Stage 3: Define the MVP
 
 ## Goal

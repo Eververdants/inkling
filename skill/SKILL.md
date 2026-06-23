@@ -5,7 +5,7 @@ description: Use this skill when the user wants to start a new software project 
 
 # /inkling — Software Project Brainstorming
 
-Drive a 5-stage recursive probing conversation to help a user with no clear project idea converge on one concrete, defensible software project, then write the result to `docs/ideas/YYYY-MM-DD-<slug>-idea.md`.
+Drive a 5-stage recursive probing conversation to help a user with no clear project idea converge on one concrete, defensible software project, then write the result to `<calling-project>/docs/ideas/YYYY-MM-DD-<slug>-idea.md`.
 
 ## When to use this skill
 
@@ -92,8 +92,9 @@ After stage 5 exits:
      - Option A: "Write to disk as-is"
      - Option B: "Edit a specific section (you'll be asked which)"
      - Option C: "Start over with a different angle"
-3. On "Write to disk" confirmation, save to `docs/ideas/YYYY-MM-DD-<slug>-idea.md`:
+3. On "Write to disk" confirmation, save to `<calling-project-root>/docs/ideas/YYYY-MM-DD-<slug>-idea.md`:
    - `<slug>` = lowercase kebab-case, 2-4 words, derived from the stage-1 problem
+   - Resolve path relative to the calling project's root (not the skill's own directory)
    - Create `docs/ideas/` if absent
 4. After saving, offer 3 follow-ups in a single `AskUserQuestion`:
    - "What next?"
@@ -101,7 +102,7 @@ After stage 5 exits:
      - Option B: "Sketch the week-1 task list for the MVP"
      - Option C: "Discuss technical risks now"
 
-If the user says "I need to think" at any point: save current state to `docs/ideas/.drafts/<timestamp>-draft.md` and stop.
+If the user says "I need to think" at any point: save current state to `<calling-project>/docs/ideas/.drafts/<timestamp>-draft.md` and stop.
 
 ## Hard rules
 
@@ -121,7 +122,7 @@ If the user says "I need to think" at any point: save current state to `docs/ide
 |----------|----------|
 | User gives all 5 stages of info in one message | From stage 1, only ask clarification questions (quantify, emotion), don't repeat known info |
 | User says "I don't know" twice | Switch to "stimulus mode": offer 3 contrasting examples (designer / kid / enterprise), let user pick closest |
-| User says "I need to think" | Stop immediately, save draft to `docs/ideas/.drafts/<ts>-draft.md` |
+| User says "I need to think" | Stop immediately, save draft to `<calling-project>/docs/ideas/.drafts/<ts>-draft.md` |
 | User switches topic mid-flow | Save current progress, ask "Saved to X. Start a new direction?" |
 | User already has a clear idea (e.g. "I want to build a Notion organizer") | Skip stage 1, enter stage 2 (audience is still useful to probe) |
 | User has a clear idea AND a clear audience | Skip stages 1-2, enter stage 3 |
