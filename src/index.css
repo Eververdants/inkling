@@ -1,3 +1,6 @@
+@import "@fontsource-variable/inter/index.css";
+@import "@fontsource-variable/fraunces/full.css";
+@import "@fontsource-variable/jetbrains-mono/index.css";
 @import "tailwindcss";
 
 /* ===== Design Tokens ===== */
@@ -27,10 +30,10 @@
   --color-amber-800: #4a331e;
   --color-amber-900: #2b1d10;
 
-  /* Type */
-  --font-display: "Fraunces", "Noto Serif SC", Georgia, serif;
-  --font-sans: "Inter", "Noto Sans SC", system-ui, -apple-system, sans-serif;
-  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+  /* Type — self-hosted via @fontsource-variable */
+  --font-display: "Fraunces Variable", "Noto Serif SC", Georgia, serif;
+  --font-sans: "Inter Variable", "Noto Sans SC", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono Variable", "Fira Code", ui-monospace, monospace;
 
   /* Easing */
   --ease-soft: cubic-bezier(0.16, 1, 0.3, 1);
