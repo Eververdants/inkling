@@ -1,52 +1,106 @@
-# Inkling — 官方落地页
+# Inkling — Landing Page
 
-Inkling 技能的官方网站。这是一个基于 Vite + React 19 + Tailwind CSS v4 的静态站点，部署在 GitHub Pages。
+The official landing page for the **Inkling** Claude Code skill — a 5-stage recursive ideation engine that turns vague ideas into shippable project proposals.
 
-## 技术栈
+Built as a static site with Vite + React 19 + Tailwind CSS v4, deployed via GitHub Pages.
 
-- **构建**：Vite 8
-- **框架**：React 19
-- **样式**：Tailwind CSS v4（Vite 插件模式）
-- **图标**：lucide-react
-- **字体**：Fraunces（衬线显示字）、Inter（无衬线正文）、JetBrains Mono（等宽）
-- **部署**：GitHub Pages
+## Tech Stack
 
-## 本地开发
+- **Build**: Vite 8
+- **Framework**: React 19
+- **Styling**: Tailwind CSS v4 (Vite plugin mode)
+- **Icons**: lucide-react
+- **Fonts**: Fraunces (display serif), Inter (body sans), JetBrains Mono (monospace), Noto Sans/Serif SC (Chinese fallback)
+- **Linting**: oxlint
+- **Deployment**: GitHub Pages via `gh-pages`
+
+## Local Development
 
 ```bash
 npm install
-npm run dev        # 启动开发服务器
-npm run build      # 构建生产版本
-npm run preview    # 预览生产版本
-npm run deploy     # 部署到 GitHub Pages
+npm run dev        # Start dev server
+npm run build      # Production build
+npm run preview    # Preview production build
+npm run deploy     # Deploy to GitHub Pages
 ```
 
-## 目录结构
+## Project Structure
 
 ```
 .
-├── index.html              # 入口 HTML（含 Google Fonts 链接）
-├── vite.config.js          # Vite 配置（集成 Tailwind v4 插件）
+├── index.html                 # Entry HTML (Google Fonts, meta tags, OG)
+├── vite.config.js             # Vite config (React + Tailwind v4 plugins)
 ├── public/
-│   └── favicon.svg         # 站点图标
+│   └── favicon.svg            # Site icon
 └── src/
-    ├── main.jsx            # React 挂载入口
-    ├── index.css           # Tailwind 入口 + 设计 Token + 自定义动画
-    └── App.jsx             # 落地页主体（含 i18n）
+    ├── main.jsx               # React mount entry
+    ├── index.css              # Tailwind entry + design tokens + custom animations
+    ├── App.jsx                # Root component (layout, scroll state, i18n)
+    ├── data/
+    │   ├── i18n.js            # Chinese / English localized copy
+    │   └── sampleProposal.js  # Sample proposal markdown for preview
+    ├── hooks/
+    │   └── useReveal.js       # IntersectionObserver-based scroll reveal hook
+    ├── utils/
+    │   └── highlightMarkdown.js # Simple markdown → HTML highlighting for sample
+    └── components/
+        ├── Nav.jsx            # Top navigation bar (ZH/EN toggle, scroll state)
+        ├── Hero.jsx           # Hero section with convergence diagram
+        ├── Convergence.jsx    # Animated SVG diagram (5 orbiting nodes → center)
+        ├── Stats.jsx          # Key metrics (5 stages, 10 questions, etc.)
+        ├── ScrollProgress.jsx # Thin scroll progress indicator at viewport top
+        ├── Stages.jsx         # 5-stage flow overview
+        ├── StageRow.jsx       # Individual stage row component
+        ├── How.jsx            # "How it works" principles section
+        ├── HowCard.jsx        # Individual principle card
+        ├── Sample.jsx         # Sample proposal output preview
+        ├── CopyButton.jsx     # Clipboard copy button for code blocks
+        ├── Install.jsx        # Installation instructions
+        ├── CTA.jsx            # Final call-to-action section
+        ├── Footer.jsx         # Footer with links and compatibility info
+        ├── Wordmark.jsx       # "Inkling" wordmark / logo
+        └── GithubMark.jsx     # GitHub icon mark
 ```
 
-## 设计
+## Design
 
-- 编辑式深色基调（暖墨黑 `#0a0905` + 琥珀重点色 `#d4a574`）
-- 非对称版式，1240px 主容器
-- 显式的大字体反差（Fraunces 衬线显示字 + Inter 正文 + JetBrains Mono 标签）
-- 收敛图（convergence diagram）作为 Hero 视觉锚点
-- 中英双语切换（顶部 ZH / EN 开关）
+- **Dark editorial theme**: Warm ink-black (`#0a0905`) base with amber (`#d4a574`) accents
+- **Asymmetric layout**: 1240px max-width container with deliberate whitespace
+- **Typography contrast**: Fraunces (display) × Inter (body) × JetBrains Mono (labels)
+- **Convergence diagram**: Animated SVG as the Hero visual anchor — 5 orbiting nodes collapsing to center
+- **Bilingual**: ZH/EN toggle in navigation, full copy in both languages
+- **Scroll reveal**: Sections fade and slide up on enter via IntersectionObserver
+- **Paper grain overlay**: Subtle noise texture for tactile depth
+- **Selection accent**: Amber highlight on dark background
 
-## 部署
+## Sections
 
-构建产物输出至 `dist/`，自动部署到 `https://eververdants.github.io/inkling`。
+| Section   | Component    | Purpose                                           |
+|-----------|-------------|---------------------------------------------------|
+| Hero      | `Hero`      | Value proposition, convergence diagram, CTA links |
+| Stats     | `Stats`     | Key metrics (5 stages, ~10 questions, 1 proposal) |
+| Stages    | `Stages`    | Deep-dive into each of the 5 probing stages        |
+| How       | `How`       | Design principles (one-at-a-time, revisitable, output) |
+| Sample    | `Sample`    | Rendered example of a generated proposal           |
+| Install   | `Install`   | One-command install instructions                   |
+| CTA       | `CTA`       | Final call to action                               |
 
-## 许可
+## Deployment
 
-MIT
+The production build outputs to `dist/` and is deployed to GitHub Pages:
+
+```
+https://eververdants.github.io/inkling
+```
+
+Deploy via:
+
+```bash
+npm run deploy
+```
+
+This pushes the `dist/` folder to the `gh-pages` branch.
+
+## License
+
+MIT — maintained by [Eververdants](https://github.com/Eververdants).
