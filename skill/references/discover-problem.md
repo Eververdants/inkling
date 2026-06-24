@@ -14,6 +14,12 @@ Extract a concrete, emotionally-weighted problem statement. The user must be abl
 
 "What problem are you trying to solve, or what frustrates you in your work or life right now?"
 
+## User-level detection (critical — do not skip)
+
+After the user's first 1-2 answers, infer their level and state it explicitly. See the table in SKILL.md. Say: "I detect you're a [level] — I'll tailor the conversation from here."
+
+This MUST happen during stage 1. If you skip it, you risk using the wrong tone and recommendations for the rest of the conversation.
+
 ## Question Format
 
 Present the opening as `AskUserQuestion`:

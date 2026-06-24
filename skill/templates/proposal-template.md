@@ -1,10 +1,10 @@
-# <Project Name>
+# <Project Name — must come from user, never decided by AI>
 
 > Use this template after the 5-stage conversation completes. The AI fills in each section from the conversation log; the user reviews before write-to-disk.
 
 ## 1. One-liner
 
-<≤20 words: what + for whom>
+≤20 words: what + for whom
 
 ## 2. Problem
 
@@ -23,6 +23,12 @@
 ## 5. Why You, Why Now
 
 <2-3 paragraphs: competitor landscape + differentiator + founder fit>
+
+## 6. Risks & Mitigations
+
+<2-4 bullets: top risks identified during stages 4-5 (tech challenges, adoption concerns, competitive threats) + how you plan to address them>
+
+- **<Risk>** — <mitigation strategy>
 
 ---
 
