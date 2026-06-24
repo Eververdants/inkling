@@ -1,0 +1,13 @@
+{
+  "name": "inkling",
+  "owner": {
+    "name": "Eververdants"
+  },
+  "plugins": [
+    {
+      "name": "inkling",
+      "source": ".",
+      "description": "From \"no idea\" to a shippable project proposal in ~10 questions"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "inkling",
+  "description": "From \"no idea\" to a shippable project proposal in ~10 questions",
+  "version": "1.0.0",
+  "author": {
+    "name": "Eververdants"
+  },
+  "repository": "https://github.com/Eververdants/inkling.git",
+  "license": "MIT",
+  "skills": [
+    "./skill"
+  ]
+}

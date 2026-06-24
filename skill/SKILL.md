@@ -15,7 +15,7 @@ description: >
 
 # /inkling — Software Project Brainstorming
 
-Drive a 5-stage recursive probing conversation to help a user with no clear project idea converge on one concrete, defensible software project, then write the result to `<calling-project>/docs/ideas/YYYY-MM-DD-<slug>-idea.md`.
+Drive a 5-stage recursive probing conversation to help a user with no clear project idea converge on one concrete, defensible software project, then write the result to `<calling-project>/docs/inkling/YYYY-MM-DD-<slug>-idea.md`.
 
 ## When to use this skill
 
@@ -119,10 +119,10 @@ After stage 5 exits:
      - Option A: "Write to disk as-is"
      - Option B: "Edit a specific section (you'll be asked which)"
      - Option C: "Start over with a different angle"
-3. On "Write to disk" confirmation, save to `<calling-project-root>/docs/ideas/YYYY-MM-DD-<slug>-idea.md`:
+3. On "Write to disk" confirmation, save to `<calling-project-root>/docs/inkling/YYYY-MM-DD-<slug>-idea.md`:
    - `<slug>` = lowercase kebab-case, 2-4 words, derived from the stage-1 problem
    - Resolve path relative to the calling project's root (not the skill's own directory)
-   - Create `docs/ideas/` if absent
+   - Create `docs/inkling/` if absent
 4. **Validate:** Read the file back from disk and verify that all filled sections are present and no section contains placeholder text. If validation fails, fix and re-save.
 5. After saving and validating, offer 3 follow-ups in a single `AskUserQuestion`:
    - "What next?"
@@ -130,7 +130,7 @@ After stage 5 exits:
      - Option B: "Sketch the week-1 task list for the MVP"
      - Option C: "Discuss technical risks now"
 
-If the user says "I need to think" at any point: save current state to `<calling-project>/docs/ideas/.drafts/<timestamp>-draft.md` and stop.
+If the user says "I need to think" at any point: save current state to `<calling-project>/docs/inkling/.drafts/<timestamp>-draft.md` and stop.
 
 ## Hard rules
 
@@ -151,7 +151,7 @@ If the user says "I need to think" at any point: save current state to `<calling
 |----------|----------|
 | User gives all 5 stages of info in one message | From stage 1, only ask clarification questions (quantify, emotion), don't repeat known info |
 | User says "I don't know" twice | Switch to "stimulus mode": offer 3 contrasting project examples from 3 angles, let user pick closest. Options: (a) a tool solving a personal annoyance (e.g., CLI to track coding activity), (b) a utility for a group you belong to (e.g., shared grocery list), (c) a small business tool (e.g., invoice generator). Tailor examples to what the user hinted at |
-| User says "I need to think" | Stop immediately, save draft to `<calling-project>/docs/ideas/.drafts/<ts>-draft.md` |
+| User says "I need to think" | Stop immediately, save draft to `<calling-project>/docs/inkling/.drafts/<ts>-draft.md` |
 | User switches topic mid-flow | Save current progress, ask "Saved to X. Start a new direction?" |
 | User wants to go back to a previous stage | Re-enter the requested stage from its opening question. Previous extraction from that stage is replaced. Any downstream stages that depended on changed answers should be revisited too |
 | User changed mind about a confirmed stage answer | Ask which part changed. Update just that part. If it invalidates downstream stage outputs, note: "This changes things for stage N too — let's revisit that as well" |
